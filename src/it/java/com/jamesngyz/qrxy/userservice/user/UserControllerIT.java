@@ -2,8 +2,6 @@ package com.jamesngyz.qrxy.userservice.user;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,14 +37,13 @@ public class UserControllerIT {
 		assertThat(response.getBody().getAuthId()).isEqualTo(request.getAuthId());
 		assertThat(response.getBody().getUsername()).isEqualTo(request.getUsername());
 		assertThat(response.getBody().getEmail()).isEqualTo(request.getEmail());
+		assertThat(response.getBody().getId()).isNotNull();
+		assertThat(response.getBody().getCreatedAt()).isNotNull();
+		assertThat(response.getBody().getCreatedBy()).isNotNull();
+		assertThat(response.getBody().getUpdatedAt()).isNotNull();
+		assertThat(response.getBody().getUpdatedBy()).isNotNull();
 		
-		Optional<User> optional = repository.findById(response.getBody().getId());
-		assertThat(optional).isPresent();
-		User persisted = optional.get();
-		
-		assertThat(persisted.getAuthId()).isEqualTo(request.getAuthId());
-		assertThat(persisted.getUsername()).isEqualTo(request.getUsername());
-		assertThat(persisted.getEmail()).isEqualTo(request.getEmail());
+		assertThat(repository.findById(response.getBody().getId())).isPresent();
 	}
 	
 }
