@@ -13,6 +13,7 @@ import lombok.Data;
 class CreateUserRequest {
 	
 	@JsonProperty("auth_id")
+	@NotNull
 	private String authId;
 	
 	@JsonProperty("username")

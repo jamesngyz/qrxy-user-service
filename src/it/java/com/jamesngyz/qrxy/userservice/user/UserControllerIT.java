@@ -49,6 +49,14 @@ public class UserControllerIT {
 	}
 	
 	@Test
+	void createUser_AuthIdNull_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withAuthIdNull();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
 	void createUser_UsernameNull_HttpStatus400() {
 		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNull();
 		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);

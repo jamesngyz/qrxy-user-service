@@ -99,6 +99,12 @@ class FakeUser {
 			return request;
 		}
 		
+		static CreateUserRequest withAuthIdNull() {
+			CreateUserRequest request = build();
+			request.setAuthId(null);
+			return request;
+		}
+		
 		static CreateUserRequest withUsernameNull() {
 			CreateUserRequest request = build();
 			request.setUsername(null);

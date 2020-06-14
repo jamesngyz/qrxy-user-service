@@ -54,6 +54,18 @@ public class UserControllerTests {
 	}
 	
 	@Test
+	void createUser_AuthIdNull_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withAuthIdNull();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
 	void createUser_UsernameNull_HttpStatus400() throws Exception {
 		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNull();
 		String requestJson = objectMapper.writeValueAsString(request);
