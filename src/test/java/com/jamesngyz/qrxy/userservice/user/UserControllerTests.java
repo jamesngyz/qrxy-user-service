@@ -53,4 +53,64 @@ public class UserControllerTests {
 				.andExpect(content().json(expected));
 	}
 	
+	@Test
+	void createUser_UsernameNull_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNull();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	void createUser_UsernameShorterThan3_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameShorterThan3();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	void createUser_UsernameLongerThan20_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameLongerThan20();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	void createUser_UsernameNotAlphanumeric_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNotAlphanumeric();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	void createUser_UsernameNotLowerCase_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNotLowerCase();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
 }

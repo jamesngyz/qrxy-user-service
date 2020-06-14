@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"auth_id\": \"{{$guid}}\",\n    \"username\": \"{{$randomUserName}}\",\n    \"email\": \"{{$randomEmail}}\"\n}",
+					"raw": "{\n    \"auth_id\": \"{{$guid}}\",\n    \"username\": \"{{$randomLoremWord}}{{$randomAlphaNumeric}}{{$randomAlphaNumeric}}\",\n    \"email\": \"{{$randomEmail}}\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -57,7 +57,7 @@
 	],
 	"variable": [
 		{
-			"id": "72dca0b9-399a-4966-8fc9-db2d91e6d36b",
+			"id": "04d0f35a-54fd-4b50-a679-6518f807c57f",
 			"key": "user_base_url",
 			"value": "http://localhost:8080",
 			"type": "string"

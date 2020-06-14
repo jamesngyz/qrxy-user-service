@@ -48,4 +48,44 @@ public class UserControllerIT {
 		assertThat(repository.findById(response.getBody().getId())).isPresent();
 	}
 	
+	@Test
+	void createUser_UsernameNull_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNull();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	void createUser_UsernameShorterThan3_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameShorterThan3();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	void createUser_UsernameLongerThan20_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameLongerThan20();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	void createUser_UsernameNotAlphanumeric_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNotAlphanumeric();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	void createUser_UsernameNotLowerCase_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withUsernameNotLowerCase();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
 }

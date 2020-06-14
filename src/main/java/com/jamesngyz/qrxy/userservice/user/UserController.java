@@ -2,6 +2,8 @@ package com.jamesngyz.qrxy.userservice.user;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +22,7 @@ public class UserController {
 	}
 	
 	@PostMapping(path = "/v1/users", produces = MediaType.APPLICATION_JSON_VALUE)
-	ResponseEntity<UserResponse> createUser(@RequestBody CreateUserRequest request) {
+	ResponseEntity<UserResponse> createUser(@Valid @RequestBody CreateUserRequest request) {
 		
 		User user = userDtoMapper.createRequestToUser(request);
 		User createdUser = service.createUser(user);
