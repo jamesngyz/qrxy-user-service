@@ -113,4 +113,28 @@ public class UserControllerTests {
 				.andExpect(status().isBadRequest());
 	}
 	
+	@Test
+	void createUser_EmailNull_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withEmailNull();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
+	@Test
+	void createUser_EmailInvalidFormat_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withEmailInvalidFormat();
+		String requestJson = objectMapper.writeValueAsString(request);
+		
+		mockMvc.perform(
+				post("/v1/users")
+						.contentType(MediaType.APPLICATION_JSON)
+						.content(requestJson))
+				.andExpect(status().isBadRequest());
+	}
+	
 }

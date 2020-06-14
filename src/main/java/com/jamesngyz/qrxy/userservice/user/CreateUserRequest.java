@@ -1,5 +1,6 @@
 package com.jamesngyz.qrxy.userservice.user;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -21,6 +22,8 @@ class CreateUserRequest {
 	private String username;
 	
 	@JsonProperty("email")
+	@NotNull
+	@Email
 	private String email;
 	
 }

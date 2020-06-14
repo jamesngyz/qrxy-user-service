@@ -128,6 +128,18 @@ class FakeUser {
 			request.setUsername(usernameNotLowerCase());
 			return request;
 		}
+		
+		static CreateUserRequest withEmailNull() {
+			CreateUserRequest request = build();
+			request.setEmail(null);
+			return request;
+		}
+		
+		static CreateUserRequest withEmailInvalidFormat() {
+			CreateUserRequest request = build();
+			request.setEmail(faker.lorem().word());
+			return request;
+		}
 	}
 	
 	static class Response {

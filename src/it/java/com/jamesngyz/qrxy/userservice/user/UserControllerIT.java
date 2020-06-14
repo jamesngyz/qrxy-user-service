@@ -88,4 +88,20 @@ public class UserControllerIT {
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 	}
 	
+	@Test
+	void createUser_EmailNull_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withEmailNull();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
+	@Test
+	void createUser_EmailInvalidFormat_HttpStatus400() {
+		CreateUserRequest request = FakeUser.CreateRequest.withEmailInvalidFormat();
+		ResponseEntity<?> response = restTemplate.postForEntity("/v1/users", request, Object.class);
+		
+		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
+	}
+	
 }
