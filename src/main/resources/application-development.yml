@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/qrxy_user
+    username: qrxy_user
+    password: qrxy_user
+  liquibase:
+    change-log: classpath:db/changelog/master.xml
