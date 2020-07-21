@@ -1,1 +1,5 @@
 spring.liquibase.enabled: false
+
+auth0:
+  issuer: https://jamesngyz.auth0.com/
+  apiAudience:

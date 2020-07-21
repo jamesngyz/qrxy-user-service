@@ -5,3 +5,11 @@ spring:
     password: test
   liquibase:
     change-log: classpath:db/changelog/master.xml
+
+auth0:
+  issuer: https://jamesngyz.auth0.com/
+  apiAudience: https://test.qurrenxy.com
+
+app.test.security:
+  clientId: VRE0fH3u21PYVVuFYZyBKW6cMrXmNK3I
+  clientSecret: ZEfiFpGwGHQUw6Zkjdi3KGOXgbOomoSq05AtpiNBhBC0dvSSc-gOg-6MIxQ6gob9

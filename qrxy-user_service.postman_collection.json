@@ -7,7 +7,37 @@
 	"item": [
 		{
 			"name": "Create User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "f0be3da9-5340-415d-8f0f-6d933dcb7659",
+						"exec": [
+							"pm.sendRequest({\r",
+							"    url: 'https://jamesngyz.auth0.com/oauth/token',\r",
+							"    method: 'POST',\r",
+							"    header: 'content-type: application/json',\r",
+							"    body: '{\"client_id\":\"VRE0fH3u21PYVVuFYZyBKW6cMrXmNK3I\",\"client_secret\":\"ZEfiFpGwGHQUw6Zkjdi3KGOXgbOomoSq05AtpiNBhBC0dvSSc-gOg-6MIxQ6gob9\",\"audience\":\"https://test.qurrenxy.com\",\"grant_type\":\"client_credentials\"}'\r",
+							"}, function (error, response) {\r",
+							"    const token = response.json().access_token;\r",
+							"    pm.environment.set(\"accessToken\", token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
 			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
 				"method": "POST",
 				"header": [],
 				"body": {
@@ -57,10 +87,9 @@
 	],
 	"variable": [
 		{
-			"id": "04d0f35a-54fd-4b50-a679-6518f807c57f",
+			"id": "cf343c43-873b-4fc8-9638-5813f9975fb0",
 			"key": "user_base_url",
-			"value": "http://localhost:8080",
-			"type": "string"
+			"value": "http://localhost:8080"
 		}
 	],
 	"protocolProfileBehavior": {}
