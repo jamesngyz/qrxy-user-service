@@ -5,3 +5,7 @@ spring:
     password: qrxy_user
   liquibase:
     change-log: classpath:db/changelog/master.xml
+
+auth0:
+  issuer: https://jamesngyz.auth0.com/
+  apiAudience: https://test.qurrenxy.com

@@ -12,6 +12,8 @@ services:
       - spring.datasource.username=qrxy_user
       - spring.datasource.password=qrxy_user
       - spring.liquibase.change-log=classpath:db/changelog/master.xml
+      - auth0.issuer=https://jamesngyz.auth0.com/
+      - auth0.apiAudience=https://test.qurrenxy.com
 
   qrxy_user_db:
     container_name: qrxy_user_db
