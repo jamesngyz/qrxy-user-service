@@ -35,8 +35,17 @@ public class UserControllerTests {
 	
 	@Test
 	void createUser_AllOk_HttpStatus201() throws Exception {
-		
 		CreateUserRequest request = FakeUser.CreateRequest.build();
+		expectHttpStatus201(request);
+	}
+	
+	@Test
+	void createUser_AuthIdNull_HttpStatus400() throws Exception {
+		CreateUserRequest request = FakeUser.CreateRequest.withAuthIdNull();
+		expectHttpStatus201(request);
+	}
+	
+	private void expectHttpStatus201(CreateUserRequest request) throws Exception {
 		String requestJson = objectMapper.writeValueAsString(request);
 		
 		User user = FakeUser.fromRequestAndSetSystemGeneratedFields(request);
@@ -53,18 +62,6 @@ public class UserControllerTests {
 				.andExpect(header().string("location", user.getId().toString()))
 				.andExpect(content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(content().json(expected));
-	}
-	
-	@Test
-	void createUser_AuthIdNull_HttpStatus400() throws Exception {
-		CreateUserRequest request = FakeUser.CreateRequest.withAuthIdNull();
-		String requestJson = objectMapper.writeValueAsString(request);
-		
-		mockMvc.perform(
-				post("/v1/users")
-						.contentType(MediaType.APPLICATION_JSON)
-						.content(requestJson))
-				.andExpect(status().isBadRequest());
 	}
 	
 	@Test

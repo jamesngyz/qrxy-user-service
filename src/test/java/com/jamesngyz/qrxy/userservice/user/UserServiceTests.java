@@ -22,6 +22,16 @@ class UserServiceTests {
 	@Test
 	void createUser_AllOk_PersistAndReturn() {
 		CreateUserRequest request = FakeUser.CreateRequest.build();
+		assertPersistAndReturn(request);
+	}
+	
+	@Test
+	void createUser_EssentialFieldsOnly_PersistAndReturn() {
+		CreateUserRequest request = FakeUser.CreateRequest.withAuthIdNull();
+		assertPersistAndReturn(request);
+	}
+	
+	private void assertPersistAndReturn(CreateUserRequest request) {
 		User input = FakeUser.fromRequest(request);
 		
 		User expected = FakeUser.build();
