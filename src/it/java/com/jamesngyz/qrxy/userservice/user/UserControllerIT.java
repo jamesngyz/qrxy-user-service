@@ -45,6 +45,19 @@ public class UserControllerIT {
 		CreateUserRequest request = FakeUser.CreateRequest.build();
 		ResponseEntity<UserResponse> response = postForEntity(request, UserResponse.class);
 		
+		assertHttpStatus201AdnValidBodyAndPersisted(request, response);
+	}
+	
+	@Test
+	void createUser_AuthIdNull_HttpStatus201AndValidBodyAndPersisted() {
+		CreateUserRequest request = FakeUser.CreateRequest.withAuthIdNull();
+		ResponseEntity<UserResponse> response = postForEntity(request, UserResponse.class);
+		
+		assertHttpStatus201AdnValidBodyAndPersisted(request, response);
+	}
+	
+	private void assertHttpStatus201AdnValidBodyAndPersisted(CreateUserRequest request,
+			ResponseEntity<UserResponse> response) {
 		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.CREATED);
 		assertThat(response.getBody()).isNotNull();
 		assertThat(response.getHeaders().getLocation()).hasPath(response.getBody().getId().toString());
@@ -60,14 +73,6 @@ public class UserControllerIT {
 		assertThat(response.getBody().getUpdatedBy()).isNotNull();
 		
 		assertThat(repository.findById(response.getBody().getId())).isPresent();
-	}
-	
-	@Test
-	void createUser_AuthIdNull_HttpStatus400() {
-		CreateUserRequest request = FakeUser.CreateRequest.withAuthIdNull();
-		ResponseEntity<?> response = postForEntity(request, Object.class);
-		
-		assertThat(response.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
 	}
 	
 	@Test
