@@ -1,0 +1,31 @@
+version: "3.4"
+services:
+  qrxy_user:
+    container_name: qrxy_user
+    image: qurrenxy/user-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - qrxy_user_db
+    environment:
+      - spring.datasource.url=jdbc:postgresql://qrxy_user_db:5432/qrxy_user
+      - spring.datasource.username=qrxy_user
+      - spring.datasource.password=qrxy_user
+      - spring.liquibase.change-log=classpath:db/changelog/master.xml
+      - auth0.issuer=https://jamesngyz.auth0.com/
+      - auth0.apiAudience=https://test.qurrenxy.com
+
+  qrxy_user_db:
+    container_name: qrxy_user_db
+    image: postgres:12.3
+    ports:
+      - "5432:5432"
+    volumes:
+      - qrxy_user_db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=qrxy_user
+      - POSTGRES_PASSWORD=qrxy_user
+
+volumes:
+  qrxy_user_db_data:
+    name: qrxy_user_db_data
