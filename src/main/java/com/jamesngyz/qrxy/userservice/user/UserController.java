@@ -1,15 +1,14 @@
 package com.jamesngyz.qrxy.userservice.user;
 
 import java.net.URI;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -31,4 +30,12 @@ public class UserController {
 		return ResponseEntity.created(URI.create(createdUser.getId().toString())).body(response);
 	}
 	
+	@PutMapping(path = "/v1/users/{id}/auth_id", produces = MediaType.TEXT_PLAIN_VALUE)
+	ResponseEntity<String> updateAuthId(
+			@PathVariable("id") UUID userId,
+			@RequestBody String authId) {
+		
+		String updatedAuthId = service.updateAuthId(userId, authId);
+		return ResponseEntity.ok(updatedAuthId);
+	}
 }

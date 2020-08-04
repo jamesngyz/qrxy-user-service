@@ -23,6 +23,23 @@ class FakeUser {
 		return user;
 	}
 	
+	static User from(User source) {
+		User clone = new User();
+		
+		clone.setId(source.getId());
+		clone.setAuthId(source.getAuthId());
+		clone.setUsername(source.getUsername());
+		clone.setEmail(source.getEmail());
+		clone.setBio(source.getBio());
+		
+		clone.setCreatedAt(source.getCreatedAt());
+		clone.setCreatedBy(source.getCreatedBy());
+		clone.setUpdatedAt(source.getCreatedAt());
+		clone.setUpdatedBy(source.getCreatedBy());
+		
+		return clone;
+	}
+	
 	static User fromRequest(CreateUserRequest request) {
 		User user = new User();
 		user.setAuthId(request.getAuthId());

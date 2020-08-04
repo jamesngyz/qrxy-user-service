@@ -18,4 +18,11 @@ class UserService {
 		return repository.save(user);
 	}
 	
+	String updateAuthId(UUID userId, String authId) {
+		User user = repository.getOne(userId);
+		user.setAuthId(authId);
+		User savedUser = repository.save(user);
+		
+		return savedUser.getAuthId();
+	}
 }

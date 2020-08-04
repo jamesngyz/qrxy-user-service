@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ActiveProfiles("test")
 @WebMvcTest
-public class UserControllerTests {
+public class UserController_Create_Tests {
 	
 	private final MockMvc mockMvc;
 	private final ObjectMapper objectMapper;
@@ -26,7 +26,7 @@ public class UserControllerTests {
 	private UserService service;
 	
 	@Autowired
-	public UserControllerTests(
+	public UserController_Create_Tests(
 			MockMvc mockMvc,
 			ObjectMapper objectMapper) {
 		this.mockMvc = mockMvc;

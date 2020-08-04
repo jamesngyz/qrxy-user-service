@@ -16,14 +16,14 @@ import com.jamesngyz.qrxy.userservice.IntegrationTestConfig;
 
 @ActiveProfiles("integration-test")
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class UserControllerIT {
+public class UserController_Create_IT {
 	
 	private final IntegrationTestConfig config;
 	private final TestRestTemplate restTemplate;
 	private final UserRepository repository;
 	
 	@Autowired
-	public UserControllerIT(
+	public UserController_Create_IT(
 			IntegrationTestConfig config,
 			TestRestTemplate restTemplate,
 			UserRepository repository) {

@@ -4,6 +4,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.notNull;
 import static org.mockito.Mockito.when;
 
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -43,6 +45,23 @@ class UserServiceTests {
 		
 		User result = subject.createUser(input);
 		assertThat(result).isEqualTo(expected);
+	}
+	
+	@Test
+	void updateUserAuthId_AllOk_PersistAndReturn() {
+		User initialUser = FakeUser.build();
+		
+		UUID userId = initialUser.getId();
+		String authId = UUID.randomUUID().toString();
+		
+		User updatedUser = FakeUser.from(initialUser);
+		updatedUser.setAuthId(authId);
+		
+		when(repository.getOne(userId)).thenReturn(initialUser);
+		when(repository.save(updatedUser)).thenReturn(updatedUser);
+		
+		String result = subject.updateAuthId(userId, authId);
+		assertThat(result).isEqualTo(authId);
 	}
 	
 }
